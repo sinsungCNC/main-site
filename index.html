@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신성CNC - 파주·일산 파이프 가공 철골구조물 전문</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: #fcfcfc; color: #333; line-height: 1.7; letter-spacing: -0.5px; }
+        a { text-decoration: none; color: inherit; }
+
+        /* 상단 헤더 영역 */
+        header { width: 100%; height: 80px; background: #fff; border-bottom: 2px solid #ff6600; position: fixed; top: 0; left: 0; z-index: 1000; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 24px; font-weight: 800; color: #111; }
+        .logo span { color: #ff6600; font-size: 13px; border: 1px solid #ff6600; padding: 2px 6px; font-weight: bold; margin-left: 8px; vertical-align: middle; }
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul a { font-size: 16px; font-weight: 500; color: #444; transition: color 0.2s; }
+        nav ul a:hover { color: #ff6600; }
+
+        /* 메인 슬라이드쇼 영역 (화질 보정 필터 락) */
+        .hero { position: relative; margin-top: 80px; width: 100%; height: 60vh; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff; }
+        .slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-color: #000; }
+        .slideshow img { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; 
+            animation: slideshow 16s infinite; 
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .slideshow img:nth-child(1) { animation-delay: 0s; }
+        .slideshow img:nth-child(2) { animation-delay: 4s; }
+        .slideshow img:nth-child(3) { animation-delay: 8s; }
+        .slideshow img:nth-child(4) { animation-delay: 12s; }
+
+        @keyframes slideshow {
+            0% { opacity: 0; }
+            5% { opacity: 1; }
+            25% { opacity: 1; }
+            30% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: -1; }
+        .hero-text { z-index: 1; padding: 0 20px; }
+        .hero-text h1 { font-size: 52px; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .hero-text p { font-size: 20px; font-weight: 400; opacity: 0.95; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+
+        /* 본문 섹션 공통 */
+        .section { padding: 90px 40px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 32px; font-weight: 700; color: #111; text-align: center; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #ff6600; margin: 15px auto 0 auto; }
+
+        /* 소개글 2분할 레이아웃 스타일 */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .about-card-machine { background: #fff; border: 1px solid #e8ebe0; border-top: 4px solid #ff6600; padding: 35px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .about-card-work { background: #fff; border: 1px solid #e8ebe0; border-top: 4px solid #222; padding: 35px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+
+        /* 주요 가공 그리드 영역 */
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .card { background: #fff; border: 1px solid #e8ebe0; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.01); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { 
+            width: 100%; height: 240px; background-size: cover; background-position: center; background-color: #ddd;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        .img-1 { background-image: url('card_01.jpg'); }
+        .img-2 { background-image: url('card_02.jpg'); }
+        .img-3 { background-image: url('card_03.jpg'); }
+        
+        .card-body { padding: 30px; }
+        .card-body h3 { font-size: 21px; font-weight: 700; color: #111; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card-body p { font-size: 15px; color: #555; line-height: 1.7; }
+
+        /* 중간 띠 배너 */
+        .middle-banner { background: #f0f4f8; text-align: center; padding: 60px 20px; border-top: 1px solid #e1e8ed; border-bottom: 1px solid #e1e8ed; }
+        .middle-banner h3 { font-size: 24px; font-weight: 700; color: #222; margin-bottom: 10px; word-break: keep-all; }
+        .middle-banner p { font-size: 16px; color: #666; }
+
+        /* 하단 포트폴리오 갤러리 */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .gallery-item { 
+            border-radius: 4px; overflow: hidden; height: 220px; background-size: cover; background-position: center; border: 1px solid #eee; background-color: #eee;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        .gal-1 { background-image: url('gal_01.jpg'); } .gal-2 { background-image: url('gal_02.jpg'); }
+        .gal-3 { background-image: url('gal_03.jpg'); } .gal-4 { background-image: url('gal_04.jpg'); }
+        .gal-5 { background-image: url('gal_05.jpg'); } .gal-6 { background-image: url('gal_06.jpg'); }
+        .gal-7 { background-image: url('gal_07.jpg'); } .gal-8 { background-image: url('gal_08.jpg'); }
+        .gal-9 { background-image: url('gal_09.jpg'); } .gal-10 { background-image: url('gal_10.jpg'); }
+        .gal-11 { background-image: url('gal_11.jpg'); } .gal-12 { background-image: url('gal_12.jpg'); }
+
+        /* 견적 문의 및 지도 */
+        .contact-section { background: #fff; border-top: 1px solid #eee; }
+        .contact-flex { display: flex; gap: 50px; justify-content: space-between; align-items: flex-start; }
+        .contact-info-side { flex: 1; }
+        .contact-map-side { flex: 1; width: 100%; min-height: 480px; border: 1px solid #ddd; }
+        
+        .info-list { list-style: none; margin-top: 25px; }
+        .info-list li { font-size: 16px; margin-bottom: 18px; color: #444; display: flex; align-items: flex-start; }
+        .info-list li strong { width: 90px; color: #111; font-weight: 700; shrink: 0; }
+        .info-list li span { flex: 1; word-break: keep-all; }
+        .info-list li a { color: #ff6600; text-decoration: underline; font-weight: 500; }
+
+        footer { background: #1a1f24; color: #8295a5; text-align: center; padding: 30px 20px; font-size: 14px; border-top: 1px solid #2d3740; }
+
+        /* ==========================================
+            ⚠️ 스마트폰/태블릿 모바일 전용 최적화 세팅
+           ========================================== */
+        @media (max-width: 991px) {
+            header { padding: 0 20px; height: 70px; }
+            nav { display: none; }
+            
+            .hero { margin-top: 70px; height: 50vh; }
+            .hero-text h1 { font-size: 34px; letter-spacing: -1px; }
+            .hero-text p { font-size: 15px; word-break: keep-all; }
+
+            .section { padding: 50px 20px; }
+            .section-title { font-size: 26px; margin-bottom: 30px; }
+            
+            .about-grid { grid-template-columns: 1fr; gap: 15px; }
+            .about-card-machine, .about-card-work { padding: 25px; }
+
+            .grid-container { grid-template-columns: 1fr; gap: 20px; }
+            .card-img { height: 200px; }
+            
+            .middle-banner h3 { font-size: 18px; }
+            .middle-banner p { font-size: 14px; }
+
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .gallery-item { height: 140px; }
+
+            .contact-flex { flex-direction: column; gap: 40px; }
+            .contact-map-side { min-height: 320px; }
+            
+            .info-list li { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">신성CNC <span>METAL WORKSHOP</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#services">실무영역</a></li>
+                <li><a href="#portfolio">포트폴리오</a></li>
+                <li><a href="#contact">견적문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="slideshow">
+            <img src="banner_01.jpg" alt="신성CNC 전경 트럭 사진">
+            <img src="banner_02.jpg" alt="공장 내부 전경">
+            <img src="banner_03.jpg" alt="파이프 자재 사진">
+            <img src="banner_04.jpg" alt="전장 제어반 내부">
+        </div>
+        <div class="hero-text">
+            <h1>신성CNC</h1>
+            <p>파주·고양 자동화 기계 제작 / 전장 개조 / 특수 CNC 가공 전문</p>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section id="about" class="section">
+        <h2 class="section-title">소개</h2>
+        
+        <p style="font-size: 18px; color: #111; font-weight: 500; text-align: center; margin-bottom: 40px; word-break: keep-all; line-height: 1.6;">
+            신성CNC는 파주·고양 접경지에 위치한 엔지니어링 철공소입니다.<br>
+            <strong>설계·제어 기술 기반의 [기계 제작]</strong>부터 <strong>정밀하고 신속한 [외주 임가공]</strong>까지 원스톱으로 해결합니다.
+        </p>
+
+        <div class="about-grid">
+            <!-- [변경완료] 기계제작 타이틀 스타일 수정 -->
+            <div class="about-card-machine">
+                <h3 style="font-size: 20px; color: #ff6600; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px;">
+                    [기계 제작 · 전장 개조] <span style="font-size: 12px; font-weight: 500; color: #aaa; margin-left: 5px; vertical-align: middle; letter-spacing: 0;">MANUFACTURING</span>
+                </h3>
+                <p style="font-size: 15px; color: #444; line-height: 1.8; word-break: keep-all;">
+                    • 산업용 커스텀 자동화 장비 및 기계 설계/제작<br>
+                    • 구형 제어 시스템 현대화 리트로핏 (LinuxCNC / Mach3 / PLC)<br>
+                    • 설계 도면 기반 제어반 제작 및 시스템 전장 튜닝 전문
+                </p>
+            </div>
+
+            <!-- [변경완료] 임가공 타이틀 스타일 수정 -->
+            <div class="about-card-work">
+                <h3 style="font-size: 20px; color: #111; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px;">
+                    [외주 임가공 · 단품/대량] <span style="font-size: 12px; font-weight: 500; color: #aaa; margin-left: 5px; vertical-align: middle; letter-spacing: 0;">PROCESSING</span>
+                </h3>
+                <p style="font-size: 15px; color: #444; line-height: 1.8; word-break: keep-all;">
+                    • 파이프 코스터 안장 가공(Saddle Cut), 대각 절단 및 타공<br>
+                    • 도면(CAD/DXF) 기반 플라즈마 CNC 구조물 정밀 절단<br>
+                    • 시제품 단품 가공 및 구조물 용접 조립 외주 가공 완벽 대응
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section" style="background-color: #f4f6f8; max-width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title">주요 가공 및 실무 영역</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-img img-1"></div>
+                    <div class="card-body">
+                        <h3>기계 제작 및 전장 개조</h3>
+                        <p>산업용 커스텀 기계·자동화 장비 설계 및 제작, 구형 레거시 기계 제어 시스템(LinuxCNC/Mach3/PLC) 리트로핏 및 전장 튜닝</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img img-2"></div>
+                    <div class="card-body">
+                        <h3>원형 파이프 가공</h3>
+                        <p>파이프 코스터(Pipe Coaster) 기반 대구경/소구경 파이프 새들 컷(Saddle Cut), 대각 절단, 연동 타공 가공 전문</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img img-3"></div>
+                    <div class="card-body">
+                        <h3>플라즈마 CNC 절단</h3>
+                        <p>각종 철판 및 SUS, 구조용 강재 도면(CAD) 기반 정밀 형상 절단 및 타공</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="middle-banner">
+        <h3>"도면(CAD/DXF) 접수 기준, 자재 절단부터 전장 제어 및 용접 조립까지 완벽 대응."</h3>
+        <p style="margin-top:5px;">현장 실무 엔지니어가 직접 전화를 받고 도면을 검토합니다. 난해한 형상이나 시제품 단품 가공도 유선으로 즉시 상담 가능합니다.</p>
+    </div>
+
+    <section id="portfolio" class="section">
+        <h2 class="section-title">현장 포트폴리오</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item gal-1"></div><div class="gallery-item gal-2"></div>
+            <div class="gallery-item gal-3"></div><div class="gallery-item gal-4"></div>
+            <div class="gallery-item gal-5"></div><div class="gallery-item gal-6"></div>
+            <div class="gallery-item gal-7"></div><div class="gallery-item gal-8"></div>
+            <div class="gallery-item gal-9"></div><div class="gallery-item gal-10"></div>
+            <div class="gallery-item gal-11"></div><div class="gallery-item gal-12"></div>
+        </div>
+    </section>
+
+    <!-- 견적 및 가공 문의 섹션 -->
+    <section id="contact" class="section contact-section">
+        <!-- [수정완료] 주황색 라인 탈조 현상 제어를 위해 중앙 정렬 레이아웃 적용 -->
+        <div style="text-align: center; max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">견적 및 가공 문의</h2>
+        </div>
+        
+        <div class="contact-flex" style="margin-top: 30px;">
+            <div class="contact-info-side">
+                <p style="font-size: 15px; color: #555;">신성CNC는 도면(CAD/DXF/STEP) 기반의 정밀 가공 및 기계 제작 전문 공장입니다. 현장 실무 엔지니어가 도면을 직접 검토하고 상담을 진행하오니, 이메일로 도면을 먼저 송부해 주신 후 직통 번호로 연락 주시면 가장 신속한 견적 확인 및 작업 일정 조율이 가능합니다.</p>
+                <ul class="info-list">
+                    <li><strong>주소</strong><span>경기도 파주시 동패동 593-2 (방문 미팅 및 자재 입고 가능)</span></li>
+                    <li><strong>전화</strong><span style="font-weight: bold; color: #ff6600;">010-3796-4323 [직통 연결]</span></li>
+                    <li><strong>이메일</strong><span>kyunghokim4323@naver.com</span></li>
+                    <li><strong>블로그</strong><span><a href="https://blog.naver.com/kyunghokim4323" target="_blank">네이버 공식 블로그 바로가기</a></span></li>
+                    <li><strong>유튜브</strong><span><a href="https://www.youtube.com/@sinsungCNC/videos" target="_blank">유튜브 채널 바로가기</a></span></li>
+                    <li><strong>인스타</strong><span><a href="https://www.instagram.com/sinsung_cnc_paju_goyang/" target="_blank">인스타그램 바로가기</a></span></li>
+                </ul>
+            </div>
+            
+<div class="contact-map-side" style="height: 480px;">
+                <iframe src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8C%8C%EC%A3%BC%EC%8B%A4%20%EB%8F%99%ED%8C%A8%EB%8F%99%20593-2&t=&z=14&ie=UTF-8&iwloc=&output=embed" style="width: 100%; height: 100%; min-height: 480px; border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2009-2026 sinsungCNC. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
